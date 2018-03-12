@@ -1,0 +1,609 @@
+﻿@model XcConnect.Models.Cotizacion
+
+@{
+    ViewBag.Title = "Nueva Cotización";
+}
+<style>
+    .input-group-addon {
+        min-width: 40px;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-top: -6px;
+    }
+</style>
+<br />
+
+@using (Html.BeginForm("Save", "Cotizacion", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row" style="margin-top: -10px;">
+
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div class="ibox-title">
+                        <h2>Nueva Cotización</h2>
+                        <table class="pull-right" style="margin-top:-40px;">
+                            <tr>
+                                <td><input type="button" value="Regresar a la lista" class="btn btn-primary" onclick="location.href='@Url.Action("Index")'" /></td>
+                                <td style="width: 5px;"></td>
+                                <td><input type="submit" value="Guardar" class="btn btn-primary btn-md" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <br />
+                    @Html.ValidationSummary(true, "Advertencias: ", new { @class = "text-danger" })
+                    <br />
+
+                    @Html.HiddenFor(model => model.IsSaved)
+                    @Html.HiddenFor(model => model.CotizacionID)
+                    @Html.HiddenFor(model => model.ActividadID)
+                    @Html.HiddenFor(model => model.NumberID)
+                    @Html.HiddenFor(model => model.Valor)
+                    @Html.Hidden("DetailItemIDF")
+                    @Html.Hidden("EditMode")
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.EmpresaID, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("EmpresaID", null, new Dictionary<string, Object> { { "class", "selectpicker show-tick form-control" }, { "data-live-search", "true" }, { "data-size", "10" }, { "onchange", "javascript:FillClients(this.value);" } })
+                            @Html.ValidationMessageFor(model => model.EmpresaID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ClienteID, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("ClienteID", null, new Dictionary<string, Object> { { "class", "selectpicker show-tick form-control" }, { "data-live-search", "true" }, { "data-size", "10" }, { "onchange", "javascript:FillVendors(this.value);" } })
+                            @Html.ValidationMessageFor(model => model.ClienteID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.VendedorID, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("VendedorID", null, new Dictionary<string, Object> { { "class", "selectpicker show-tick form-control" }, { "data-live-search", "true" }, { "data-size", "10" } })
+                            @Html.ValidationMessageFor(model => model.VendedorID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Oportunidad, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("OportunidadID", null, "Seleccione Oportunidad", new Dictionary<string, Object> { { "class", "selectpicker show-tick form-control" }, { "data-live-search", "true" }, { "data-size", "5" } })
+                            @Html.ValidationMessageFor(model => model.OportunidadID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="ibox-title">
+                                <h2>Detalle de la Cotización</h2>
+                                <table class="pull-right" style="margin-top:-40px;">
+                                    <tr>
+                                        <td><input type="button" value="Nuevo Item" class="btn btn-primary" onclick="AddNewItemModal(); return false;" /></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table id="tblDetail" class="table table-striped table-bordered table-hover dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>Id.</th>
+                                            <th>Código</th>
+                                            <th>Nombre</th>
+                                            <th>Especificaciones</th>
+                                            <th>Cant.</th>
+                                            <th>Val. Uni.</th>
+                                            <th>Val. Tot.</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.Items != null)
+                                        {
+                                            foreach (var item in Model.Items)
+                                            {
+                                                <tr id="@("del"+item.ItemID)">
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Producto.ProductoID)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Producto.Codigo)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Producto.NombreProducto)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Producto.Especificaciones)
+                                                    </td>
+                                                    <td align="right">
+                                                        @Html.DisplayFor(modelItem => item.Cantidad)
+                                                    </td>
+                                                    <td align="right">
+                                                        @Html.DisplayFor(modelItem => item.ValUnitario)
+                                                    </td>
+                                                    <td align="right">
+                                                        @Html.DisplayFor(modelItem => item.ValTotal)
+                                                    </td>
+                                                    <td>
+                                                        <a class="fa fa-pencil-square-o" href="#" title="Editar" onclick="EditRecord(@item.ItemID); return false;"></a> |
+                                                        <a class="fa fa-trash-o" href="#" data-backdrop="static" data-href="Petición Id=@item.ItemID" data-pkid="@item.ItemID" data-toggle="modal" data-target="#confirm-delete" title="Eliminar"></a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Confirmar Eliminación de Item</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Estás a punto de eliminar un registro, este procedimiento es irreversible.</p>
+                <p>¿Quieres proceder?</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <a id="btnDelete" class="btn btn-danger btn-ok" data-dismiss="modal">Eliminar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="record-manager" tabindex="-1" role="dialog" aria-labelledby="RecordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="RecordModalLabel">Nuevo Item</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row wrapper">
+                    <div class="col-md-12">
+                        <div class="form-group" id="productGroup">
+                            @Html.Label("Producto", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-shopping-basket"></i></span>
+                                    @Html.DropDownList("ItemProductoID", null, new Dictionary<string, Object> { { "class", "selectpicker show-tick form-control" }, { "data-live-search", "true" }, { "data-size", "10" }, { "onchange", "javascript:FillUnitValue(this.value);" } })
+                                    @Html.ValidationMessageFor(model => model.ItemProductoID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 5px;">
+                            @Html.Label("Cantidad", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-bullseye"></i></span>
+                                    @Html.EditorFor(model => model.ItemCantidad, new { htmlAttributes = new { @class = "form-control", @style = "text-align: right;", @type = "number" } })
+                                    @Html.ValidationMessageFor(model => model.ItemCantidad, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 5px;">
+                            @Html.Label("Valor Unitario", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">$</span>
+                                    @Html.EditorFor(model => model.ItemValUnitario, new { htmlAttributes = new { @class = "form-control", @style = "text-align: right;", @type = "number" } })
+                                    @Html.ValidationMessageFor(model => model.ItemValUnitario, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 5px;">
+                            @Html.Label("Total", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">$</span>
+                                    @Html.EditorFor(model => model.ItemValTotal, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @style = "text-align: right;", @type = "number" } })
+                                    @Html.ValidationMessageFor(model => model.ItemValTotal, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <a id="btnAdd" class="btn btn-primary btn-ok">Guardar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    @Styles.Render("~/bundles/bootstrapselect/css/")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrapselect")
+}
+
+<script type="text/javascript">
+
+    (function ($) {
+        $.fn.invisible = function () {
+            return this.each(function () {
+                $(this).css("visibility", "hidden");
+            });
+        };
+        $.fn.visible = function () {
+            return this.each(function () {
+                $(this).css("visibility", "visible");
+            });
+        };
+    }(jQuery));
+
+    $(document).on('show.bs.modal', '#confirm-delete', function (e) {
+        $('#btnDelete').attr('onclick', 'deleteAction(' + $(e.relatedTarget).data('pkid') + ');');
+    })
+
+    $(document).on('show.bs.modal', '#record-manager', function (e) {
+        $('#btnAdd').attr('onclick', 'SaveNewRecord();');
+    })
+
+    function SaveNewRecord() {
+
+        var InEditMode = $('#EditMode').val();
+        if (InEditMode == '1') {
+            SaveEditedRecord();
+            return;
+        }
+
+        var _productID = $('#ItemProductoID').val();
+        var _Can = $('#ItemCantidad').val();
+        var _ValUnit = $('#ItemValUnitario').val();
+
+        if (!_productID || _productID == 0) {
+            alert('Seleccione un producto');
+            return;
+        }
+
+        if (_Can == 0) {
+            alert('Ingrese una cantidad');
+            return;
+        }
+
+        if (_ValUnit == 0) {
+            alert('Ingrese valor unitario');
+            return;
+        }
+
+        var _model = { CotID: "" + $('#CotizacionID').val() + "", IsSaved: "" + $('#IsSaved').val() + "", EmpID: "" + $('#EmpresaID').val() + "", CliID: "" + $('#ClienteID').val() + "", VenID: "" + $('#VendedorID').val() + "", ProID: "" + $("#ItemProductoID").val() + "", Can: "" + $('#ItemCantidad').val() + "", ValUn: "" + $('#ItemValUnitario').val() + "", ValTo: "" + $('#ItemValTotal').val() + "" };
+
+        $.ajax({
+            url: '@Url.Action("SaveProduct")',
+            data: JSON.stringify(_model),
+            cache: false,
+            type: "POST",
+            contentType: "application/json",
+            success: function (data) {
+                if (data) {
+                    if (data.Success) {
+                        $('#record-manager').modal('toggle');
+
+                        if ($('#IsSaved').val() == 'False' || $('#IsSaved').val() == 'false') {
+                            window.location.href = "/cotizacion/manage/" + data.CotID;
+                        }
+                        else {
+                            $("#tblDetail tbody").append(data.Message);
+                        }
+                    }
+                    else {
+                        alert(data.Message);
+                    }
+                }
+                else {
+                    alert('Por favor inténtelo de nuevo.');
+                }
+            },
+            error: function (reponse) {
+                alert('Error ejecutando la acción. Por favor inténtelo de nuevo.');
+            }
+        });
+    }
+
+    function SaveEditedRecord() {
+
+        var _itemID = $('#DetailItemIDF').val();
+        var _Can = $('#ItemCantidad').val();
+        var _ValUnit = $('#ItemValUnitario').val();
+
+        if (_itemID && _Can && _ValUnit) {
+            $.ajax({
+                url: '@Url.Action("UpdateItemDetail")',
+                data: { itemID: _itemID, can: _Can, valUni: _ValUnit },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    if (data) {
+                        if (data.Success) {
+
+                            $('#Valor').val(data.newTotal);
+
+                            $("#del" + _itemID).replaceWith(data.Message);
+                            $('#record-manager').modal('toggle');
+
+                            $('#EditMode').val('0');
+                        }
+                        else {
+                            alert(data.Message);
+                        }
+                    }
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+        }
+        else {
+            alert('No se reconoce un valor válido. Por fvor, intente de nuevo');
+        }
+    }
+
+    function EditRecord(_itemID) {
+        if (_itemID) {
+
+            var _empresaID = $('#EmpresaID').val();
+
+            $('#DetailItemIDF').val(_itemID);
+            $('#EditMode').val('1');
+
+            $.ajax({
+                url: '@Url.Action("GetProductsByEmpresaIDForEdit")',
+                data: { empresaID: _empresaID, itemID: _itemID },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    if (data) {
+                        if (data.Success) {
+                            $('#RecordModalLabel').text('Editar Item');
+
+                            $("#ItemProductoID").val(_itemID);
+                            $("#productGroup").invisible();
+
+                            $('#ItemCantidad').val(data.Can);
+                            $('#ItemValUnitario').val(data.ValUni);
+                            $('#ItemValTotal').val(data.ValTot.toFixed(2));
+
+                            $('#record-manager').modal('show');
+                        }
+                        else {
+                            alert(data.Message);
+                        }
+                    }
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+        }
+    }
+
+    function AddNewItemModal() {
+        var valid = true;
+
+        var _empresaID = $('#EmpresaID').val();
+        var CliID = $('#ClienteID').val();
+        var VenID = $('#VendedorID').val();
+
+        if (_empresaID && CliID && VenID && _empresaID != 0 && CliID != 0 && VenID != 0) {
+            $.ajax({
+                url: '@Url.Action("GetProductsByEmpresaID")',
+                data: { empresaID: _empresaID },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    if (data) {
+                        if (data.Success) {
+
+                            $('#RecordModalLabel').text('Nuevo Item');
+
+                            var markup = "<option value='0'>Seleccione Producto</option>";
+                            for (var x = 0; x < data.List.length; x++) {
+                                markup += "<option value=" + data.List[x].Value + ">" + data.List[x].Text + "</option>";
+                            }
+
+                            $("#productGroup").visible();
+                            $("#ItemProductoID").html(markup).selectpicker('refresh');
+                            $("#ItemProductoID").removeAttr('readonly');
+
+                            $('#ItemCantidad').val("0");
+                            $('#ItemValUnitario').val("0");
+                            $('#ItemValTotal').val("0");
+
+                            $('#record-manager').modal('show');
+                        }
+                    }
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+        }
+        else {
+            alert('Antes de agregar un elemento, debe diligenciar la información solicitada de la cotización.');
+        }
+    }
+
+    function deleteAction(idF) {
+        $.ajax({
+            url: '@Url.Action("DeleteItem")',
+            data: { id: idF },
+            success: function (data) {
+                if (data) {
+                    if (!data.Success) {
+                        BootstrapDialog.show({ title: 'Eliminación', message: data.Message });
+                    }
+                    else {
+                        $("#del" + idF).fadeOut("normal", function () { $(this).remove(); });
+                    }
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert("Error ejecutando la acción de eliminar. Por favor inténtelo de nuevo.");
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        if ($('#IsSaved').val() == 'False' || $('#IsSaved').val() == 'false') {
+            ClearClientAndVendors();
+            FillClients($('#EmpresaID').val());
+        }
+
+        $('#ItemCantidad').on('change', function () { CalcTotalVal(); });
+        $('#ItemValUnitario').on('change', function () { CalcTotalVal(); });
+    });
+
+    function CalcTotalVal() {
+        var Can = $('#ItemCantidad').val();
+        var Val = $('#ItemValUnitario').val();
+
+        $('#ItemValTotal').val((Can * Val).toFixed(2));
+    }
+
+    function ClearClientAndVendors() {
+        var markupC = "<option value='0'>Seleccione Cliente</option>";
+        $("#ClienteID").html(markupC).selectpicker('refresh');
+
+        var markupV = "<option value='0'>Seleccione Vendedor</option>";
+        $("#VendedorID").html(markupV).selectpicker('refresh');
+    }
+
+    function FillUnitValue(_prodID) {
+        if (_prodID) {
+            $.ajax({
+                url: '@Url.Action("GetProductUnitValue")',
+                data: { prodID: _prodID },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    if (data) {
+                        if (data.Success) {
+                            $("#ItemValUnitario").val(data.Value);
+                        }
+                    }
+                },
+                error: function (reponse) { }
+            });
+        }
+    }
+
+    function FillClients(_empresaID) {
+        ClearClientAndVendors();
+
+        if (_empresaID) {
+            var procemessage = "<option value='0'> Consultando ...</option>";
+            $("#ClienteID").html(procemessage).show().selectpicker('refresh');
+
+            $.ajax({
+                url: '@Url.Action("GetClientByEmpresaID")',
+                data: { empresaID: _empresaID },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    if (data) {
+                        if (data.Success) {
+                            var markup = "<option value='0'>Seleccione Cliente</option>";
+                            for (var x = 0; x < data.List.length; x++) {
+                                markup += "<option value=" + data.List[x].Value + ">" + data.List[x].Text + "</option>";
+                            }
+                            $("#ClienteID").html(markup).selectpicker('refresh');
+                        }
+                    }
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+        }
+    }
+
+    function FillVendors(_clientID) {
+
+        if (_clientID) {
+            var procemessage = "<option value='0'> Consultando ...</option>";
+            $("#VendedorID").html(procemessage).show().selectpicker('refresh');
+
+            $.ajax({
+                url: '@Url.Action("GetVendorsByClientID")',
+                data: { clientID: _clientID },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    if (data) {
+                        if (data.Success) {
+                            var markup = "<option value='0'>Seleccione Vendedor</option>";
+
+                            var selected = false;
+
+                            for (var x = 0; x < data.List.length; x++) {
+
+                                if (!selected) {
+                                    markup += "<option value=" + data.List[x].Value + " selected>" + data.List[x].Text + "</option>";
+                                    selected = true;
+                                }
+                                else {
+                                    markup += "<option value=" + data.List[x].Value + ">" + data.List[x].Text + "</option>";
+                                }
+                            }
+                            
+                            $("#VendedorID").html(markup).selectpicker('refresh');
+                        }
+                    }
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+        }
+    }
+
+    function clearTableContent() {
+        $("#devicedata").fadeOut("normal", function () { $(this).empty(); });
+    }
+</script>

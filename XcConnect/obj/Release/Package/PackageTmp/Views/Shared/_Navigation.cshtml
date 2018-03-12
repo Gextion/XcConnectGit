@@ -1,0 +1,194 @@
+﻿<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
+        <div class="sidebar-collapse" style="overflow-x: hidden; overflow-y: auto; width: auto; height: 100%;">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        @if (XcConnect.Helpers.ApplicationContext.CurrentUser.Empresa != null && !String.IsNullOrEmpty(XcConnect.Helpers.ApplicationContext.CurrentUser.Empresa.LogoUrl))
+                        {
+                            <span>
+                                <img id="@System.Guid.NewGuid().ToString()" alt="Logo Empresa" src="@XcConnect.Helpers.ApplicationContext.CurrentUser.Empresa.LogoUrl" width="170" />
+                            </span>
+                        }
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear">
+                                <span class="block m-t-xs">
+                                    <strong class="font-bold">@XcConnect.Helpers.ApplicationContext.CurrentUser.FullName</strong>
+                                </span>
+                                <span class="text-muted text-xs block">@XcConnect.Helpers.ApplicationContext.CurrentUser.RolName<b class="caret"></b></span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a href="/account/edit/@XcConnect.Helpers.ApplicationContext.CurrentUser.Id">Editar Perfil</a></li>
+                            <li><a href="@Url.Action("LogOff", "Authentication")">Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        TI
+                    </div>
+                </li>
+
+                @if (XcConnect.Helpers.ApplicationContext.CurrentUser.IsSeller &&
+                (!XcConnect.Helpers.ApplicationContext.CurrentUser.IsSuperAdmin || !XcConnect.Helpers.ApplicationContext.CurrentUser.IsAdmin))
+                {
+                    <li class="@Html.IsSelected()">
+                        <a href="#"><i class="fa fa-window-restore"></i> <span class="nav-label" data-i18n="nav.menulevels">Maestros</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li class="@Html.IsSelected(controller: "clientes", controller2: "index")"><a href="@Url.Action("Index", "Clientes")"><i class="fa fa-address-book-o"></i>Clientes</a></li>
+                            <li class="@Html.IsSelected(controller: "contactos", action: "index")"><a href="@Url.Action("Index", "Contactos")"><i class="fa fa-male"></i>Contactos</a></li>
+                            <li class="@Html.IsSelected(controller: "productos", controller2: "index")"><a href="@Url.Action("Index", "Productos")"><i class="fa fa-shopping-basket"></i>Productos</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="@Html.IsSelected(controller: "actividades", action: "index")"><a href="@Url.Action("Index", "Actividades")"><i class="fa fa-calendar"></i>Actividades</a></li>
+                    <li class="@Html.IsSelected(controller: "oportunidades", action: "index")"><a href="@Url.Action("Index", "Oportunidades")"><i class="fa fa-handshake-o"></i>Oportunidades</a></li>
+                    <li class="@Html.IsSelected(controller: "cotizacion", action: "index")"><a href="@Url.Action("Index", "Cotizacion")"><i class="fa fa-shopping-cart"></i>Cotizaciones</a></li>
+                }
+                else
+                {
+                    <li class="@Html.IsSelected()">
+                        @if (!XcConnect.Helpers.ApplicationContext.CurrentUser.IsInterventor)
+                        {
+                            <a href="#"><i class="fa fa-window-restore"></i> <span class="nav-label" data-i18n="nav.menulevels">Maestros</span><span class="fa arrow"></span></a>
+                        }
+                        <ul class="nav nav-second-level">
+                            @if (XcConnect.Helpers.ApplicationContext.CurrentUser.IsSuperAdmin || XcConnect.Helpers.ApplicationContext.CurrentUser.IsAdmin)
+                            {
+                                <li class="@Html.IsSelected(controller: "empresas", action: "index")"><a href="@Url.Action("Index", "Empresas")"><i class="fa fa-industry"></i>Empresas</a></li>
+                            }
+
+                            @if (!XcConnect.Helpers.ApplicationContext.CurrentUser.IsInterventor)
+                            {
+                                <li class="@Html.IsSelected(controller: "clientes", controller2: "index")"><a href="@Url.Action("Index", "Clientes")"><i class="fa fa-address-book-o"></i>Clientes</a></li>
+                                <li class="@Html.IsSelected(controller: "contactos", action: "index")"><a href="@Url.Action("Index", "Contactos")"><i class="fa fa-male"></i>Contactos</a></li>
+                                <li class="@Html.IsSelected(controller: "vendedores", controller2: "index")"><a href="@Url.Action("Index", "Vendedores")"><i class="fa fa-user-o"></i>Vendedores</a></li>
+                                <li class="@Html.IsSelected(controller: "productos", controller2: "index")"><a href="@Url.Action("Index", "Productos")"><i class="fa fa-shopping-basket"></i>Productos</a></li>
+                            }
+                        </ul>
+                    </li>
+
+                    if (!XcConnect.Helpers.ApplicationContext.CurrentUser.IsInterventor)
+                    {
+                        <li class="@Html.IsSelected(controller: "actividades", action: "index")"><a href="@Url.Action("Index", "Actividades")"><i class="fa fa-calendar"></i>Actividades</a></li>
+                        <li class="@Html.IsSelected(controller: "oportunidades", action: "index")"><a href="@Url.Action("Index", "Oportunidades")"><i class="fa fa-handshake-o"></i>Oportunidades</a></li>
+                        <li class="@Html.IsSelected(controller: "cotizacion", action: "index")"><a href="@Url.Action("Index", "Cotizacion")"><i class="fa fa-shopping-cart"></i>Cotizaciones</a></li>
+                        <li class="@Html.IsSelected(controller: "peticiones", action: "index")"><a href="@Url.Action("Index", "Peticiones")"><i class="fa fa-question-circle-o"></i>PQRs</a></li>
+                    }
+                }
+
+                @*controller: "reports"*@
+                <li class="@Html.IsSelected()">
+                    <a href="#"><i class="fa fa-file-text-o"></i> <span class="nav-label" data-i18n="nav.menulevels">Reportes </span><span class="fa arrow"></span></a>
+                    @if (!XcConnect.Helpers.ApplicationContext.CurrentUser.IsInterventor)
+                    {
+                        <ul class="nav nav-second-level">
+                            <li class="@Html.IsSelected(controller: "reports", action: "actividades")">
+                                <a href="@Url.Action("Actividades", "Reports")">Actividades</a>
+                            </li>
+                            @if (!XcConnect.Helpers.ApplicationContext.CurrentUser.IsSuperAdmin)
+                            {
+                                <li class="@Html.IsSelected(controller: "reportclientes", action: "clientes")">
+                                    <a href="@Url.Action("Clientes", "ReportClientes")">Clientes</a>
+                                </li>
+                            }
+                            <li class="@Html.IsSelected(controller: "reports", action: "cotizaciones")">
+                                <a href="@Url.Action("Cotizaciones", "Reports")">Cotizaciones</a>
+                            </li>
+                            @if (XcConnect.Helpers.ApplicationContext.CurrentUser.IsSuperAdmin)
+                            {
+                                <li class="@Html.IsSelected(controller: "reportempresas", action: "empresas")">
+                                    <a href="@Url.Action("Empresas", "ReportEmpresas")">Empresas</a>
+                                </li>
+                            }
+                            <li class="@Html.IsSelected(controller: "reports", action: "oportunidades")">
+                                <a href="@Url.Action("Oportunidades", "Reports")">Oportunidades</a>
+                            </li>
+
+                            @if (XcConnect.Helpers.ApplicationContext.CurrentUser.IsSuperAdmin)
+                            {
+                                <li class="@Html.IsSelected(controller: "empresas", action: "clientesempresa")">
+                                    <a href="@Url.Action("ClientesEmpresa", "Empresas")">Clientes x Empresa</a>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav nav-second-level">
+                            <li class="@Html.IsSelected(controller: "empresas", action: "clientesempresa")">
+                                <a href="@Url.Action("ClientesEmpresa", "Empresas")">Clientes x Empresa</a>
+                            </li>
+
+                            @*<li class="@Html.IsSelected(controller: "empresas", action: "clientesempresa")">
+                                <a href="@Url.Action( "ClientesEmpresa", "Empresas")">Clientes x Empresa</a>
+                            </li>*@
+                        </ul>
+                    }
+                </li>
+
+                @if (@XcConnect.Helpers.ApplicationContext.CurrentUser.IsSuperAdmin || @XcConnect.Helpers.ApplicationContext.CurrentUser.IsAdmin)
+                {
+                    <li class="@Html.IsSelected(controller: "importarclientes", controller2: "importarproductos", controller3: "importarvendedores")">
+                        <a href="#"><i class="fa fa-users"></i> Importar Datos <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li class="@Html.IsSelected(controller: "importarclientes", action: "index")">
+                                <a href="@Url.Action("Index", "ImportarClientes")"><i class="fa fa-address-book"></i>Clientes</a>
+                            </li>
+                            <li class="@Html.IsSelected(controller: "importarproductos", action: "index")">
+                                <a href="@Url.Action("Index", "ImportarProductos")"><i class="fa fa-shopping-basket"></i>Productos</a>
+                            </li>
+                            <li class="@Html.IsSelected(controller: "importarvendedores", action: "index")">
+                                <a href="@Url.Action("Index", "ImportarVendedores")"><i class="fa fa-user-o"></i>Vendedores</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    if (XcConnect.Helpers.ApplicationContext.CurrentUser.IsSuperAdmin)
+                    {
+                        <li class="@Html.IsSelected(controller: "ciudades")">
+                            <a href="#"><i class="fa fa-table"></i> <span class="nav-label" data-i18n="nav.menulevels">Tablas </span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li class="@Html.IsSelected(controller: "ciudades", action: "index")"><a href="@Url.Action("Index", "Ciudades")"><i class="fa fa-globe"></i>Ciudades</a></li>
+                                <li class="@Html.IsSelected(controller: "sectoreseconomicos", action: "index")"><a href="@Url.Action("Index", "SectoresEconomicos")"><i class="fa fa-university"></i>Sectores Económicos</a></li>
+                            </ul>
+                        </li>
+                    }
+
+                    if (XcConnect.Helpers.ApplicationContext.CurrentUser.IsSuperAdmin || XcConnect.Helpers.ApplicationContext.CurrentUser.IsAdmin)
+                    {
+                        <li class="@Html.IsSelected(controller: "account", controller2: "groups", controller3: "roles")">
+                            <a href="#"><i class="fa fa-cog"></i> <span class="nav-label" data-i18n="nav.menulevels">Administración </span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li class="@Html.IsSelected(controller: "account", controller2: "groups", controller3: "roles")">
+                                    <a href="#"><i class="fa fa-shield"></i> Seguridad <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li class="@Html.IsSelected(controller: "account", action: "index")">
+                                            <a href="@Url.Action("Index", "Account")">Usuarios</a>
+                                        </li>
+
+                                        @if (XcConnect.Helpers.ApplicationContext.CurrentUser.IsSuperAdmin)
+                                        {
+                                            <li class="@Html.IsSelected(controller: "groups", action: "index")">
+                                                <a href="@Url.Action("Index", "Groups")">Roles</a>
+                                            </li>
+                                            <li class="@Html.IsSelected(controller: "roles", action: "index")">
+                                                <a href="@Url.Action("Index", "Roles")">Permisos</a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </li>
+                                @if (XcConnect.Helpers.ApplicationContext.CurrentUser.IsSuperAdmin)
+                                {
+                                    <li class="@Html.IsSelected(controller: "authentication", action: "audit")"><a href="@Url.Action("Audit", "Authentication")"><i class="fa fa-lock"></i>Auditoría de Ingresos</a></li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                }
+            </ul>
+
+        </div>
+        <div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 76.6488px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.9; z-index: 90; right: 1px;">
+        </div>
+    </div>
+</nav>

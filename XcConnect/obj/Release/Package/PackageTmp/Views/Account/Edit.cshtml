@@ -1,0 +1,147 @@
+﻿@model XcConnect.Models.Security.ApplicationUser
+<br />
+
+<style>
+    .input-group-addon {
+        min-width: 40px;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-top: -6px;
+    }
+
+    a.my-class {
+        color: #ffffff;
+    }
+
+        a.my-class:active {
+            color: #ffffff;
+        }
+
+        a.my-class:link {
+            color: #ffffff;
+        }
+
+        a.my-class:visited {
+            color: #ffffff;
+        }
+</style>
+<br />
+
+@using (Html.BeginForm("Edit", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row wrapper border-bottom white-bg page-headingl">
+
+        <br />
+        <div class="row form-fl-title">
+            <table style="width:100%">
+                <tr>
+                    <td><h2>Editar Usuario</h2></td>
+                    <td style="text-align: right"><i class="fa fa-key" aria-hidden="true"></i> @Html.ActionLink("Modificar Contraseña", "Manage", new { id = Model.Id }, new { @class = "my-class" })</td>
+                </tr>
+            </table>
+        </div>
+
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <br />
+
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.PasswordHash)
+        @Html.HiddenFor(model => model.SecurityStamp)
+
+        <div class="form-group">
+            @Html.Label("Empresa", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-university"></i></span>
+                    @Html.DropDownList("EmpresaID", null, new Dictionary<string, Object> { { "class", "selectpicker show-tick form-control" }, { "data-live-search", "true" }, { "data-size", "10" } })
+                    @Html.ValidationMessageFor(model => model.EmpresaID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Usuario", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user-circle-o"></i></span>
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-font"></i></span>
+                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-id-card-o"></i></span>
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Teléfono", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default btn-md" })
+                <input type="submit" value="Guardar" class="btn btn-primary btn-md" />
+            </div>
+        </div>
+
+        <br />
+
+        <div>
+            @Html.ActionLink("Regresar a la lista", "Index")
+        </div>
+
+        <br />
+
+    </div>
+}
+
+@section Styles {
+    @Styles.Render("~/bundles/bootstrapselect/css/")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/bootstrapselect")
+}

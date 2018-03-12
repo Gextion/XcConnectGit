@@ -1,0 +1,158 @@
+﻿@model XcConnect.Models.CotizacionPrint
+
+@{
+    ViewBag.Title = "Imprimir Cotización";
+}
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h2>Imprimir Cotización</h2>
+                    <div class="ibox-tools">
+                        <table class="pull-right" style="margin-top:-40px;">
+                            <tr>
+                                <td>@Html.ActionLink("Regresar a la lista", "Index", null, new { @class = "btn btn-primary" })</td>
+                                <td style="width: 5px;"></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary pull-right" onclick="sendPDF(@Model.ClienteID, @Model.CotizacionIDPK); return false;" title="Enviar PDF por correo electrónico">
+                                        <i class="fa fa-envelope-o"></i>
+                                    </button>
+                                </td>
+                                <td style="width: 5px;"></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary pull-right" onclick="printJS({ printable: 'customprintarea', type: 'html', maxWidth: 1824, font: 'Arial', font_size: '11pt' }); return false;" title="Imprimir">
+                                        <i class="fa fa-print"></i>
+                                    </button>
+                                </td>
+                                <td style="width: 5px;"></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary pull-right" onclick="exportTableToCSV('cotizacion.csv'); return false;" title="Exportar a CSV">
+                                        <i class="fa fa-file-excel-o"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="ibox-content">
+                        <div id="customprintarea">
+                            <center><h1>Cotización Nro. @Model.CotizacionID - @Model.Fecha</h1></center>
+                            <br />
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-4"><b>Empresa: </b>@Model.Empresa<br /></div>
+                                    <div class="col-md-4"><b>Cliente: </b>@Model.Cliente<br /></div>
+                                    <div class="col-md-4"><b>Vendedor: </b>@Model.Vendedor<br /></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4"><b>Valor Total: </b>@Model.Total<br /></div>
+                                </div>
+                            </div>
+                            <br /><br />
+                            <h2>Productos</h2>
+                            <br />
+                            <div id="contentRaw" class="table-responsive">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/bundles/bootstrapselect/css/")
+    @Styles.Render("~/bundles/bootstrapdialog/css")
+
+    <style type="text/css" media="print">
+        @@page {
+            size: landscape;
+        }
+
+        @@page land {
+            size: landscape;
+        }
+
+        @@page port {
+            size: landscape;
+        }
+
+        @@media print {
+            @@page {
+                size: landscape;
+            }
+        }
+    </style>
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrapdialog")
+    @Scripts.Render("~/bundles/bootstrapselect")
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var Html = "@Html.Raw(@Model.Content)";
+            $('#contentRaw').html(Html);
+        });
+
+        function clearTableContent() {
+            $("#rptTable").fadeOut("normal", function () { $(this).empty(); });
+        }
+
+        function sendPDF(pcliID, pcotID) {
+            $.ajax({
+                url: '@Url.Action("SendByEmail", "Cotizacion")',
+                data: { CliID: pcliID, CotID: pcotID },
+                success: function (data) {
+                    if (data) {
+                        BootstrapDialog.show({ title: 'Enviar PDF', message: data.Message });
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert("Error ejecutando la acción de eliminar. Por favor inténtelo de nuevo.");
+                }
+            });
+        }
+
+        function exportTableToCSV(filename) {
+            var csv = [];
+            var rows = document.querySelectorAll("#rptTable tr");
+
+            for (var i = 0; i < rows.length; i++) {
+                var row = [], cols = rows[i].querySelectorAll("td, th");
+
+                for (var j = 0; j < cols.length; j++)
+                    row.push(cols[j].innerText);
+
+                csv.push(row.join(","));
+            }
+
+            // Download CSV file
+            var link = window.document.createElement("a");
+            link.setAttribute("href", "data:text/csv;charset=utf-8,%EF%BB%BF" + encodeURI(csv.join("\n")));
+            link.setAttribute("download", filename);
+            link.click();
+        }
+    </script>
+}
+
+<style>
+    .table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dataTable.display tbody td {
+        border-top: none;
+    }
+
+    .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+        border-top: none;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        border-top: none;
+    }
+</style>

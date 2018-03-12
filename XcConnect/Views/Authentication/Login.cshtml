@@ -1,0 +1,80 @@
+﻿@model XcConnect.Models.LoginModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+
+
+    <title>XcConnect | Inicio de Sesión</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="~/Content/animate.css" rel="stylesheet">
+    <link href="~/Content/style.css" rel="stylesheet">
+
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+
+    <style>
+        .checkbox {
+            float: left;
+        }
+    </style>
+</head>
+
+<body class="login-bg">
+
+    <div class="md-skin middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+
+                <h1 class="logo-name">
+                </h1>
+
+                <img src="~/Images/xcLogo.png" width="250" style="border-radius: 5px;" />
+
+            </div>
+            @*<h3><p style="color: white">Bienvenido</p></h3>
+            <div style="color: white">Control y gestión. v @XcConnect.Helpers.SysHelper.GetSysVersion()</div>*@
+
+            @using (Html.BeginForm("Authenticate", "Authentication", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <hr />
+                @Html.ValidationSummary(true, "", new { @style = "color: white; text-align: left; " })
+
+                <div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.Nit, new { @class = "form-control", @placeholder = "Usuario", @required = "" })
+                    </div>
+                    <div class="form-group">
+                        @Html.PasswordFor(m => m.Phone, new { @class = "form-control", @placeholder = "Contraseña", @type = "password", @required = "" })
+                    </div>
+                    <div class="form-group" style="text-align: left;">
+                        <small>@Html.ActionLink("Olvidé mi contraseña", "ForgotPwd", null, new { @style = "color: white; margin-left: 0px;" })</small>
+                    </div>
+
+                    <input type="submit" value="Iniciar Sesión" class="btn btn-primary block full-width m-b" />
+
+                </div>
+            }
+
+            @*<p class="m-t" style="color: white"> <small>ProyectSoft &copy; 2017</small> </p>*@
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $("input[type=text]").first().focus();
+        });
+    </script>
+
+</body>
+</html>

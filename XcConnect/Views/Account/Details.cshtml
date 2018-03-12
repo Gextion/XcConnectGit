@@ -1,0 +1,60 @@
+﻿@model XcConnect.Models.Security.ApplicationUser
+
+@{
+    ViewBag.Title = "Detalle del Usuario";
+}
+
+<br />
+
+<div class="row wrapper border-bottom white-bg page-headingl">
+
+    <br />
+    <h2>Detalle del Usuario</h2>
+    <hr />
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.Label("Usuario")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpresaID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empresa.Nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+    </dl>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Regresar a la lista", "Index")
+    </p>
+</div>

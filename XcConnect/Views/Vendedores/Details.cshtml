@@ -1,0 +1,64 @@
+﻿
+@model XcConnect.Models.Vendedor
+
+@{
+    ViewBag.Title = "Vendedor";
+}
+
+<br />
+
+<div class="row wrapper border-bottom white-bg page-headingl">
+
+    <br />
+        <h2>Detalle Vendedor</h2>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Empresa.Codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empresa.Codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreVendedor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreVendedor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Celular)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Celular)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+    </dl>
+
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.VendedorID }) |
+    @Html.ActionLink("Regresar a la lista", "Index")
+</p>
+
+</div>
+

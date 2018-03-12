@@ -1,0 +1,86 @@
+﻿@model XcConnect.Models.Oportunidad
+
+@{
+    ViewBag.Title = "Oportunidades";
+}
+
+<h2>Eliminar Oportunidad</h2>
+
+<h3>Esta seguro de eliminar esta Oportunidad?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreOportunidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreOportunidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SolicitadaPor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SolicitadaPor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaSolicitud)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaSolicitud)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaEntrega)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaEntrega)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCierre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCierre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-primary btn-md" /> |
+            @Html.ActionLink("Regresar a la lista", "Index")
+        </div>
+    }
+</div>

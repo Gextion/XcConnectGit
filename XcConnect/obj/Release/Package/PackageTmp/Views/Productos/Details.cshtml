@@ -1,0 +1,56 @@
+﻿
+@model XcConnect.Models.Producto
+
+@{
+    ViewBag.Title = "Productos";
+}
+
+<br />
+
+<div class="row wrapper border-bottom white-bg page-headingl">
+
+    <br />
+        <h2>Detalle Productos</h2>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreProducto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreProducto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Especificaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Especificaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+
+    </dl>
+
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ProductoID }) |
+    @Html.ActionLink("Regresar a la lista", "Index")
+</p>
+
+</div>
+

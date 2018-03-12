@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CotizacionPDF" xml:space="preserve">
+    <value>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Cotización&lt;/title&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;meta http-equiv="X-UA-Compatible" content="IE=edge" /&gt;
+&lt;style type="text/css"&gt;
+    body, table, td, a{-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;}
+    table, td{mso-table-lspace: 0pt; mso-table-rspace: 0pt;}
+    img{-ms-interpolation-mode: bicubic;}
+    img{border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none;}
+    table{border-collapse: collapse !important;}
+    body{height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important;}
+	a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; font-size: inherit !important; font-family: inherit !important; font-weight: inherit !important; line-height: inherit !important; }
+    @media screen and (max-width: 525px) {
+        .wrapper { width: 100% !important; max-width: 100% !important; }
+        .logo img { margin: 0 auto !important;}
+        .mobile-hide { display: none !important; }
+        .img-max { max-width: 100% !important; width: 100% !important; height: auto !important; }
+        .responsive-table { width: 100% !important; }
+        .padding { padding: 10px 5% 15px 5% !important; }
+        .padding-meta { padding: 30px 5% 0px 5% !important; text-align: center; }
+        .padding-copy { padding: 10px 5% 10px 5% !important; text-align: center; }
+        .no-padding { padding: 0 !important;}
+        .section-padding { padding: 50px 15px 50px 15px !important; }
+        .mobile-button-container { margin: 0 auto; width: 100% !important; }
+        .mobile-button { padding: 15px !important; border: 0 !important; font-size: 16px !important; display: block !important; }
+    }
+    div[style*="margin: 16px 0;"] { margin: 0 !important; }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body style="margin: 0 !important; padding: 0 !important;"&gt;
+&lt;div style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: Helvetica, Arial, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;"&gt;De acuerdo a su amable solicitud, le estamos enviando la cotización...&lt;/div&gt;
+&lt;table border="0" cellpadding="0" cellspacing="0" width="100%"&gt;
+    &lt;tr&gt;
+        &lt;td bgcolor="#ffffff" align="center" style="padding: 15px;"&gt;
+            &lt;!--[if (gte mso 9)|(IE)]&gt;&lt;table align="center" border="0" cellspacing="0" cellpadding="0" width="500"&gt;&lt;tr&gt;&lt;td align="center" valign="top" width="500"&gt;&lt;![endif]--&gt;
+            &lt;table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 500px;" class="responsive-table"&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;
+                        &lt;table width="100%" border="0" cellspacing="0" cellpadding="0"&gt;
+                            &lt;!--&lt;tr&gt;&lt;td align="center" style="font-size: 32px; font-family: Helvetica, Arial, sans-serif; color: #333333; padding-top: 30px;" class="padding-copy"&gt;Cotización&lt;/td&gt;&lt;/tr&gt; --&gt;
+                            &lt;tr&gt;&lt;td align="justify" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"&gt;Estimado [NOM_CLI], de acuerdo a su amable solicitud, le estamos enviando la cotización Nro [COT_NUM]. Esperamos cumplir con sus expectativas y quedamos atentos a resolver cualquier inquietud al respecto.&lt;/td&gt;&lt;/tr&gt;
+                        &lt;/table&gt;
+                    &lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/table&gt;
+            &lt;!--[if (gte mso 9)|(IE)]&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;![endif]--&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td bgcolor="#ffffff" align="center" style="padding: 15px;"&gt;
+            &lt;table border="0" cellpadding="0" cellspacing="0" width="500" class="responsive-table"&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;
+                        &lt;table width="100%" border="0" cellspacing="0" cellpadding="0"&gt;
+                            &lt;tr&gt;
+                                &lt;td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"&gt;&lt;b&gt;Atentamente,&lt;/b&gt;&lt;/td&gt;
+                            &lt;/tr&gt;                           
+							&lt;tr&gt;
+                                &lt;td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"&gt;[NOM_EMP]&lt;/td&gt;
+                            &lt;/tr&gt;                           
+							&lt;tr&gt;
+                                &lt;td align="left" style="padding: 5px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"&gt;[NOM_VEN]&lt;/td&gt;
+                            &lt;/tr&gt;                           
+							&lt;tr&gt;
+                                &lt;td align="left" style="padding: 5px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"&gt;[EMAIL_VEN]&lt;/td&gt;
+                            &lt;/tr&gt;
+							&lt;tr&gt;
+                                &lt;td align="left" style="padding: 5px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"&gt;[CELL_VEN]&lt;/td&gt;
+                            &lt;/tr&gt;
+                        &lt;/table&gt;
+                    &lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/table&gt;
+            &lt;!--[if (gte mso 9)|(IE)]&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;![endif]--&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td bgcolor="#ffffff" align="center" style="padding: 20px 0px;"&gt;
+            &lt;!--[if (gte mso 9)|(IE)]&gt;&lt;table align="center" border="0" cellspacing="0" cellpadding="0" width="500"&gt;&lt;tr&gt;&lt;td align="center" valign="top" width="500"&gt;&lt;![endif]--&gt;
+            &lt;table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="max-width: 500px;" class="responsive-table"&gt;
+                &lt;tr&gt;&lt;td align="center" style="font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color:#666666;"&gt;ProyectSoft&lt;/td&gt;&lt;/tr&gt;
+            &lt;/table&gt;
+            &lt;!--[if (gte mso 9)|(IE)]&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;![endif]--&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;</value>
+  </data>
+  <data name="ForgotPwd" xml:space="preserve">
+    <value>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Recuperación de Contraseña&lt;/title&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;meta http-equiv="X-UA-Compatible" content="IE=edge" /&gt;
+&lt;style type="text/css"&gt;
+    body, table, td, a{-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;}
+    table, td{mso-table-lspace: 0pt; mso-table-rspace: 0pt;}
+    img{-ms-interpolation-mode: bicubic;}
+    img{border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none;}
+    table{border-collapse: collapse !important;}
+    body{height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important;}
+	a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; font-size: inherit !important; font-family: inherit !important; font-weight: inherit !important; line-height: inherit !important; }
+    @media screen and (max-width: 525px) {
+        .wrapper { width: 100% !important; max-width: 100% !important; }
+        .logo img { margin: 0 auto !important;}
+        .mobile-hide { display: none !important; }
+        .img-max { max-width: 100% !important; width: 100% !important; height: auto !important; }
+        .responsive-table { width: 100% !important; }
+        .padding { padding: 10px 5% 15px 5% !important; }
+        .padding-meta { padding: 30px 5% 0px 5% !important; text-align: center; }
+        .padding-copy { padding: 10px 5% 10px 5% !important; text-align: center; }
+        .no-padding { padding: 0 !important;}
+        .section-padding { padding: 50px 15px 50px 15px !important; }
+        .mobile-button-container { margin: 0 auto; width: 100% !important; }
+        .mobile-button { padding: 15px !important; border: 0 !important; font-size: 16px !important; display: block !important; }
+    }
+    div[style*="margin: 16px 0;"] { margin: 0 !important; }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body style="margin: 0 !important; padding: 0 !important;"&gt;
+&lt;div style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: Helvetica, Arial, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;"&gt;A continuación se le presenta la información de su cuenta. Si desea modificar la información de...&lt;/div&gt;
+&lt;table border="0" cellpadding="0" cellspacing="0" width="100%"&gt;
+    &lt;tr&gt;
+        &lt;td bgcolor="#ffffff" align="center" style="padding: 15px;"&gt;
+            &lt;!--[if (gte mso 9)|(IE)]&gt;&lt;table align="center" border="0" cellspacing="0" cellpadding="0" width="500"&gt;&lt;tr&gt;&lt;td align="center" valign="top" width="500"&gt;&lt;![endif]--&gt;
+            &lt;table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 500px;" class="responsive-table"&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;
+                        &lt;table width="100%" border="0" cellspacing="0" cellpadding="0"&gt;
+                            &lt;tr&gt;&lt;td align="center" style="font-size: 32px; font-family: Helvetica, Arial, sans-serif; color: #333333; padding-top: 30px;" class="padding-copy"&gt;Recuperación de Contraseña!&lt;/td&gt;&lt;/tr&gt;
+                            &lt;tr&gt;&lt;td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"&gt;A continuación se le presenta la información de su cuenta.&lt;/td&gt;&lt;/tr&gt;
+                        &lt;/table&gt;
+                    &lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/table&gt;
+            &lt;!--[if (gte mso 9)|(IE)]&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;![endif]--&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td bgcolor="#ffffff" align="center" style="padding: 15px;" class="padding"&gt;
+            &lt;!--[if (gte mso 9)|(IE)]&gt;&lt;table align="center" border="0" cellspacing="0" cellpadding="0" width="500"&gt;&lt;tr&gt;&lt;td align="center" valign="top" width="500"&gt;&lt;![endif]--&gt;
+            &lt;table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 500px;" class="responsive-table"&gt;
+                &lt;tr&gt;
+                    &lt;td style="padding: 20px 10px 0px 10px; border-top: 1px dashed #aaaaaa;"&gt;
+                        &lt;table cellspacing="0" cellpadding="0" border="0" width="100%"&gt;
+                            &lt;tr&gt;
+                                &lt;td valign="top" class="mobile-wrapper"&gt;
+                                    &lt;table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="left"&gt;
+                                        &lt;tr&gt;
+                                            &lt;td style="padding: 0 0 10px 0;"&gt;
+                                                &lt;table cellpadding="0" cellspacing="0" border="0" width="100%"&gt;
+                                                    &lt;tr&gt;
+                                                        &lt;td align="left" style="font-family: Arial, sans-serif; color: #333333; font-size: 16px;"&gt;Contraseña:&lt;/td&gt;
+                                                    &lt;/tr&gt;
+                                                &lt;/table&gt;
+                                            &lt;/td&gt;
+                                        &lt;/tr&gt;
+                                    &lt;/table&gt;
+                                    &lt;table cellpadding="0" cellspacing="0" border="0" width="47%" style="width: 47%;" align="right"&gt;
+                                        &lt;tr&gt;
+                                            &lt;td style="padding: 0 0 10px 0;"&gt;
+                                                &lt;table cellpadding="0" cellspacing="0" border="0" width="100%"&gt;
+                                                    &lt;tr&gt;
+                                                        &lt;td align="right" style="font-family: Arial, sans-serif; color: #EB9000; font-size: 16px;"&gt;{PWD_NEW}&lt;/td&gt;
+                                                    &lt;/tr&gt;
+                                                &lt;/table&gt;
+                                            &lt;/td&gt;
+                                        &lt;/tr&gt;
+                                    &lt;/table&gt;
+                                &lt;/td&gt;
+                            &lt;/tr&gt;
+                        &lt;/table&gt;
+                    &lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;&lt;td style="padding: 10px 0 0px 0; border-bottom: 1px dashed #aaaaaa;"&gt;&lt;/td&gt;&lt;/tr&gt;
+            &lt;/table&gt;
+            &lt;!--[if (gte mso 9)|(IE)]&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;![endif]--&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td bgcolor="#ffffff" align="center" style="padding: 15px;"&gt;
+            &lt;table border="0" cellpadding="0" cellspacing="0" width="500" class="responsive-table"&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;
+                        &lt;table width="100%" border="0" cellspacing="0" cellpadding="0"&gt;
+                            &lt;tr&gt;
+                                &lt;td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"&gt;Este es mensaje automático.&lt;/td&gt;
+                            &lt;/tr&gt;                           
+                        &lt;/table&gt;
+                    &lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/table&gt;
+            &lt;!--[if (gte mso 9)|(IE)]&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;![endif]--&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td bgcolor="#ffffff" align="center" style="padding: 20px 0px;"&gt;
+            &lt;!--[if (gte mso 9)|(IE)]&gt;&lt;table align="center" border="0" cellspacing="0" cellpadding="0" width="500"&gt;&lt;tr&gt;&lt;td align="center" valign="top" width="500"&gt;&lt;![endif]--&gt;
+            &lt;table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="max-width: 500px;" class="responsive-table"&gt;
+                &lt;tr&gt;&lt;td align="center" style="font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color:#666666;"&gt;ProyectSoft&lt;/td&gt;&lt;/tr&gt;
+            &lt;/table&gt;
+            &lt;!--[if (gte mso 9)|(IE)]&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;![endif]--&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;</value>
+  </data>
+</root>

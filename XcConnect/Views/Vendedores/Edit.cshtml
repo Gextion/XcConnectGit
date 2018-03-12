@@ -1,0 +1,93 @@
+﻿
+@model XcConnect.Models.Vendedor
+
+@{
+    ViewBag.Title = "Vendedor";
+}
+<style>
+    .input-group-addon { min-width:40px; text-align:center; }
+    .form-group{ margin-top: -8px; }
+</style>
+<br />
+
+@using (Html.BeginForm("Edit", "Vendedores", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="row wrapper border-bottom white-bg page-headingl">
+        <div class="row form-fl-title">
+            <h2>Editar Vendedor</h2>
+        </div>
+        <br />
+		@Html.ValidationSummary(true, "Advertencias: ", new { @class = "text-danger" })
+		<br />
+        @Html.HiddenFor(model => model.VendedorID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Codigo, htmlAttributes: new { @class = "control-label col-md-2" })            
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Codigo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Codigo, "", new { @class = "text-danger" })
+		    </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NombreVendedor, htmlAttributes: new { @class = "control-label col-md-2" })            
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NombreVendedor, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NombreVendedor, "", new { @class = "text-danger" })
+		    </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Celular, htmlAttributes: new { @class = "control-label col-md-2" })            
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Celular, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Celular, "", new { @class = "text-danger" })
+		    </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })            
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+		    </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.EmpresaID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("EmpresaID", null, new Dictionary<string, Object> { { "class", "selectpicker show-tick form-control" }, { "data-live-search", "true" }, { "data-size", "10" } })
+                @Html.ValidationMessageFor(model => model.EmpresaID, "", new { @class = "text-danger" })
+		    </div>
+        </div>*@
+
+      	<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Guardar" class="btn btn-primary btn-md" />
+			</div>
+		</div>
+
+        <br/>
+
+        <div>
+	        @Html.ActionLink("Regresar a la lista", "Index")
+        </div>
+
+        <br/>
+    
+	</div>
+}
+
+
+@section Styles {
+    @Styles.Render("~/bundles/bootstrapselect/css/")
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrapselect")
+}

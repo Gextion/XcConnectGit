@@ -1,0 +1,72 @@
+﻿@model XcConnect.Models.Peticion
+
+@{
+    ViewBag.Title = "PQRs";
+}
+
+<h2>Eliminar Registros</h2>
+
+<h3>Esta seguro de Eliminar esta PQR?</h3>
+<div>
+    <h4>Peticion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaRegistro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaRegistro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoPeticion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoPeticion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaSolucion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaSolucion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Solucion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Solucion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResueltaPor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResueltaPor)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-primary btn-md" /> |
+            @Html.ActionLink("Regresar a la lista", "Index")
+        </div>
+    }
+</div>

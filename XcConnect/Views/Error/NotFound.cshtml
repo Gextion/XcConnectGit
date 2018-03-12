@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TI CRM | Página no encontrada</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="~/Content/animate.css" rel="stylesheet">
+    <link href="~/Content/style.css" rel="stylesheet">
+</head>
+<body class="gray-bg">
+    <div class="middle-box text-center animated fadeInDown">
+        <h1>404</h1>
+        <h3 class="font-bold">Página no encontrada</h3>
+
+        <div class="error-desc">
+            Lo sentimos, pero la página que estaba buscando no se puede encontrar.<br />
+            Puede volver a la página principal: <br /><a href="@Url.Action("Dashboard", "Dashboards")" class="btn btn-primary m-t">Tablero de Control</a>
+        </div>
+    </div>
+</body>
+</html>

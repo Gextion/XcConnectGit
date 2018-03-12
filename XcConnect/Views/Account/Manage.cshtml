@@ -1,0 +1,28 @@
+﻿@using XcConnect.Models;
+@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "Administrar Cuenta";
+}
+<p class="text-success">@ViewBag.StatusMessage</p>
+
+<div class="row wrapper border-bottom white-bg page-headingl">
+    <div class="row form-fl-title">
+        <h2>Administración de Contraseña</h2>
+    </div>
+    <br />
+
+    <div class="col-md-12">
+        @if (ViewBag.HasLocalPassword)
+        {
+            @Html.Partial("_ChangePasswordPartial")
+        }
+        else
+        {
+            @Html.Partial("_SetPasswordPartial")
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

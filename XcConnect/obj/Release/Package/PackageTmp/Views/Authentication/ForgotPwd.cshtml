@@ -1,0 +1,68 @@
+﻿@model XcConnect.Models.ForgotPwdModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Eficiencia Energética | Recordar Contraseña</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="~/Content/animate.css" rel="stylesheet">
+    <link href="~/Content/style.css" rel="stylesheet">
+
+</head>
+
+<body class="login-bg">
+
+    <div class="middle-box text-center animated fadeInDown">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ibox-content">
+
+                    <h2 class="font-bold">Olvidé mi Contraseña</h2>
+
+                    <p>
+                        Ingrese su nombre de usuario y su contraseña será restablecida y enviada por correo electrónico a usted.
+                    </p>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            @using (Html.BeginForm("SendPwd", "Authentication", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <hr />
+                                @Html.ValidationSummary(true, "Errores: ", new { @style = "text-align: left; " })
+                                <br />
+
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Usuario", @required = "", @maxlength = "10" })
+                                </div>
+
+                                <input type="submit" value="Enviar Contraseña" class="btn btn-primary block full-width m-b" />
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <center><p class="m-t" style="color: white"> <small>Cinergy &copy; 2017</small> </p></center>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $("input[type=text]").first().focus();
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+﻿@model XcConnect.Models.Actividades
+
+@{
+    ViewBag.Title = "Actividades";
+}
+
+<h2>Eliminar Actividad</h2>
+
+<h3>Esta seguro de eliminar esta actividad?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaRegistro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaRegistro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoActividad.NombreTipoActividad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoActividad.NombreTipoActividad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaEntrega)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaEntrega)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notas)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-primary btn-md" />
+            @Html.ActionLink("Regresar a la lista", "Index")
+        </div>
+    }
+</div>

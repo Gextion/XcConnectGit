@@ -1,0 +1,73 @@
+﻿@model XcConnect.Models.Actividades
+
+@{
+    ViewBag.Title = "Actividades";
+}
+
+<h2>Detalles Actividad</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaRegistro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaRegistro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoActividad.NombreTipoActividad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoActividad.NombreTipoActividad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaEntrega)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaEntrega)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notas)
+        </dd>
+
+        @if (Model.Archivos != null && Model.Archivos.Count > 0)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Archivos)
+            </dt>
+            <dd>
+                <ul>
+                    @foreach (var archivo in Model.Archivos)
+                    {
+                        <li>
+                            <a href="@archivo.ArchivoUrl" target="_blank">@archivo.ArchivoNombre</a>
+                        </li>
+                    }
+                </ul>
+            </dd>
+        }
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ActividadID }) |
+    @Html.ActionLink("Regresar a la lista", "Index")
+</p>

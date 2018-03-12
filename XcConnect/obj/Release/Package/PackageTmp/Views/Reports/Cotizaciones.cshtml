@@ -1,0 +1,240 @@
+﻿@model XcConnect.Models.Reports.RptCotizaciones
+
+@{
+    ViewBag.Title = "Cotizaciones";
+}
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Filtros Reporte</h5>
+                    <div class="ibox-tools">
+                        <input type="button" value="PDF" class="btn btn-primary pull-right" onclick="printJS({ printable: 'printarea', type: 'html', maxWidth: 1824, font: 'Arial', font_size: '11pt'})" style="margin-top:-10px;margin-left: 5px;" />
+                        <input type="button" value="Excel" class="btn btn-primary pull-right" onclick="exportTableToCSV('cotizacion.csv')" style="margin-top:-10px;margin-left: 5px;" />
+                        <input type="button" value="Filtrar" class="btn btn-primary pull-right" onclick="BuildRpt(); return false;" style="margin-top:-10px;" />
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h5>Cliente</h5>
+                                @Html.DropDownList("ClienteID", null, "Todos", new Dictionary<string, Object> { { "class", "selectpicker show-tick form-control" }, { "data-live-search", "true" }, { "data-size", "10" } })
+                                @Html.ValidationMessageFor(model => model.ClienteID, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                <h5>Vendedor</h5>
+                                @Html.DropDownList("VendedorID", null, "Todos", new Dictionary<string, Object> { { "class", "selectpicker show-tick form-control" }, { "data-live-search", "true" }, { "data-size", "10" } })
+                                @Html.ValidationMessageFor(model => model.VendedorID, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                <h5>Fecha Inicial</h5>
+                                @Html.EditorFor(model => model.FechaInicial, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.FechaInicial, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                <h5>Fecha Final</h5>
+                                @Html.EditorFor(model => model.FechaFinal, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.FechaFinal, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div id="printarea">
+                            <center><h1>TI CRM - Cotización</h1></center>
+                            <br />
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-4"><b>Cliente: </b><span id="ClienteText"></span><br /></div>
+                                    <div class="col-md-4"><b>Vendedor: </b><span id="VendedorText"></span><br /></div>
+                                    <div class="col-md-4" />
+                                </div>
+                                <div class="row" style="margin-top:10px;">
+                                    <div class="col-md-4"><b>Fecha Inicial: </b><span id="FecIniText"></span><br /></div>
+                                    <div class="col-md-4"><b>Fecha Final: </b><span id="FecFinText"></span><br /></div>
+                                    <div class="col-md-4" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="table-responsive">
+                                <table id="rptTable" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th align="center"><b>Nro. Cotización</b></th>
+                                            <th align="center"><b>Fecha</b></th>
+                                            <th align="center"><b>Cliente</b></th>
+                                            <th align="center"><b>Vendedor</b></th>
+                                            <th align="center"><b>Oportunidad</b></th>
+                                            <th align="center"><b>Valor Total</b></th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/bundles/bootstrapselect/css/")
+    @Styles.Render("~/bundles/bootstrapdialog/css")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrapdialog")
+    @Scripts.Render("~/bundles/bootstrapselect")
+
+    <script type="text/javascript">
+
+        function BuildRpt() {
+
+            var cliID = $('#ClienteID').val();
+            var venID = $('#VendedorID').val();
+            var Fi = $('#FechaInicial').val();
+            var Ff = $('#FechaFinal').val();
+
+            $('#ClienteText').text($("#ClienteID option:selected").text());
+            $('#VendedorText').text($("#VendedorID option:selected").text());
+            $('#FecIniText').text($('#FechaInicial').val());
+            $('#FecFinText').text($('#FechaFinal').val());
+
+            $.ajax({
+                url: '@Url.Action("BuildRptCotizaciones")',
+                data: { ClienteID: cliID, VendedorID: venID, FecIni: Fi, FecFin: Ff },
+                success: function (data) {
+                    if (data) {
+                        if (!data.Success) {
+                            clearTableContent();
+                            BootstrapDialog.show({ title: 'Reporte', message: data.Message });
+                        }
+                        else {
+                            $('#rptTable').html(data.RptContent);
+                        }
+                    }
+                    else {
+                        clearTableContent();
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    BootstrapDialog.show({ title: 'Error', message: "Error ejecutando la acción. Por favor inténtelo de nuevo." });
+                }
+            });
+        }
+
+        function clearTableContent() {
+            $("#rptTable").fadeOut("normal", function () { $(this).empty(); });
+        }
+
+        function FillSedes(_empresaID) {
+
+            if (_empresaID == "") { _empresaID = "999999"; }
+
+            if (_empresaID) {
+                var procemessage = "<option value='0'> Consultando ...</option>";
+                $("#sedeID").html(procemessage).show().selectpicker('refresh');
+
+                $.ajax({
+                    url: '@Url.Action("GetSedesByEmpresaID", "Sedes")',
+                    data: { empresaID: _empresaID },
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        if (data) {
+                            if (data.Success) {
+                                var markup = "<option value='999999'>(Todas)</option>";
+                                for (var x = 0; x < data.List.length; x++) {
+                                    markup += "<option value=" + data.List[x].Value + ">" + data.List[x].Text + "</option>";
+                                }
+                                $("#SedeID").html(markup).selectpicker('refresh');
+                            }
+                        }
+                    },
+                    error: function (reponse) {
+                        alert("error : " + reponse);
+                    }
+                });
+            }
+        }
+
+        function FillDevices() {
+
+            var _empID = $('#EmpresaID').val();
+            var _sedeID = $('#SedeID').val();
+            var _fueID = $('#FuenteID').val();
+
+            if (_empID == "") { _empID = "999999"; }
+            if (_sedeID == "") { _sedeID = "999999"; }
+            if (_fueID == "") { _fueID = "999999"; }
+
+            if (_sedeID) {
+                var procemessage = "<option value='0'> Consultando ...</option>";
+                $("#DispositivoID").html(procemessage).show().selectpicker('refresh');
+
+                $.ajax({
+                    url: '@Url.Action("GetDeviceBySedeIdAndFuenteId", "Consumos")',
+                    data: { empID: _empID, sedeID: _sedeID, fuenteId: _fueID },
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        if (data) {
+                            if (data.Success) {
+                                var markup = "<option value='999999'>(Todos)</option>";
+                                for (var x = 0; x < data.List.length; x++) {
+                                    markup += "<option value=" + data.List[x].Value + ">" + data.List[x].Text + "</option>";
+                                }
+                                $("#DispositivoID").html(markup).selectpicker('refresh');
+                            }
+                        }
+                    },
+                    error: function (reponse) {
+                        alert("error : " + reponse);
+                    }
+                });
+            }
+        }
+
+        $(document).ready(function () {
+            FillSedes($('#EmpresaID').val());
+        });
+
+        function exportTableToCSV(filename) {
+            var csv = [];
+            var rows = document.querySelectorAll("table tr");
+
+            for (var i = 0; i < rows.length; i++) {
+                var row = [], cols = rows[i].querySelectorAll("td, th");
+
+                for (var j = 0; j < cols.length; j++)
+                    row.push(cols[j].innerText);
+
+                csv.push(row.join(";"));
+            }
+
+            // Download CSV file
+            var link = window.document.createElement("a");
+            link.setAttribute("href", "data:text/csv;charset=utf-8,%EF%BB%BF" + encodeURI(csv.join("\n")));
+            link.setAttribute("download", filename);
+            link.click();
+        }
+    </script>
+}
+
+<style>
+    .table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dataTable.display tbody td {
+        border-top: none;
+    }
+
+    .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+        border-top: none;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        border-top: none;
+    }
+</style>

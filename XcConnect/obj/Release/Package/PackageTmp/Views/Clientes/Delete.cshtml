@@ -1,0 +1,112 @@
+﻿@model XcConnect.Models.Cliente
+
+@{
+    ViewBag.Title = "Clientes";
+}
+
+<h2>Eliminar Cliente</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <h3>Esta seguro de Eliminar este cliente?</h3>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Ciudad.Ciudad)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Ciudad.Ciudad)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Nit)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Nit)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.RazonSocial)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RazonSocial)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.RepresentanteLegal)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RepresentanteLegal)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SectorEconomico.SectorEconomico)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SectorEconomico.SectorEconomico)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Direccion)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Telefono)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Celular)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Celular)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SitioWeb)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SitioWeb)
+            </dd>
+
+        </dl>
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Eliminar" class="btn btn-primary btn-md" />
+                @Html.ActionLink("Regresar a la lista", "Index")
+            </div>
+    </div>
+}

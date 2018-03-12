@@ -1,0 +1,239 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AspNet.Identity.EntityFramework.Multitenant</name>
+    </assembly>
+    <members>
+        <member name="T:AspNet.Identity.EntityFramework.Multitenant.IMultitenantUser">
+            <summary>
+            Minimal interface for a <see cref="T:AspNet.Identity.EntityFramework.Multitenant.IMultitenantUser`2"/> with a <see cref="T:System.String"/> user
+            <see cref="P:Microsoft.AspNet.Identity.IUser`1.Id"/> and <see cref="P:AspNet.Identity.EntityFramework.Multitenant.IMultitenantUser`2.TenantId"/>.
+            </summary>
+        </member>
+        <member name="T:AspNet.Identity.EntityFramework.Multitenant.IMultitenantUser`2">
+            <summary>
+            Interface defining a multi-tenant user.
+            </summary>
+            <typeparam name="TKey">The type of <see cref="P:Microsoft.AspNet.Identity.IUser`1.Id"/> for a user.</typeparam>
+            <typeparam name="TTenantKey">The type of <see cref="P:AspNet.Identity.EntityFramework.Multitenant.IMultitenantUser`2.TenantId"/> for a user.</typeparam>
+        </member>
+        <member name="P:AspNet.Identity.EntityFramework.Multitenant.IMultitenantUser`2.TenantId">
+            <summary>
+            Gets or sets the unique identifier of the tenant.
+            </summary>
+        </member>
+        <member name="T:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityDbContext`1">
+            <summary>
+            Identity <see cref="T:System.Data.Entity.DbContext"/> for multi tenant user accounts.
+            </summary>
+            <typeparam name="TUser">The type of user.</typeparam>
+        </member>
+        <member name="T:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityDbContext`7">
+            <summary>
+            Identity <see cref="T:System.Data.Entity.DbContext"/> for multi tenant user accounts.
+            </summary>
+            <typeparam name="TUser">The type of user.</typeparam>
+            <typeparam name="TRole">The type of role.</typeparam>
+            <typeparam name="TKey">The type of <see cref="P:Microsoft.AspNet.Identity.IUser`1.Id"/> for a user.</typeparam>
+            <typeparam name="TTenantKey">The type of <see cref="P:AspNet.Identity.EntityFramework.Multitenant.IMultitenantUser`2.TenantId"/> for a user.</typeparam>
+            <typeparam name="TUserLogin">The type of user login.</typeparam>
+            <typeparam name="TUserRole">The type of user role.</typeparam>
+            <typeparam name="TUserClaim">The type of user claim.</typeparam>
+        </member>
+        <member name="M:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityDbContext`7.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityDbContext`7"/> class.
+            </summary>
+        </member>
+        <member name="M:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityDbContext`7.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityDbContext`7"/> class.
+            </summary>
+            <param name="nameOrConnectionString">Either the database name or a connection string. </param>
+        </member>
+        <member name="M:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityDbContext`7.ValidateEntity(System.Data.Entity.Infrastructure.DbEntityEntry,System.Collections.Generic.IDictionary{System.Object,System.Object})">
+            <summary>
+            Performs custom validation.
+            </summary>
+            <param name="entityEntry"><see cref="T:System.Data.Entity.Infrastructure.DbEntityEntry"/> instance to be validated. </param>
+            <param name="items">User-defined dictionary containing additional info for custom validation. It will be
+            passed to ValidationContext and will be exposed as ValidationContext.Items.
+            This parameter is optional and can be null.
+            </param>
+            <returns>Entity validation result. Possibly null when overridden.</returns>
+        </member>
+        <member name="M:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityDbContext`7.OnModelCreating(System.Data.Entity.DbModelBuilder)">
+            <summary>
+            Applies custom model definitions for multi-tenancy.
+            </summary>
+            <param name="modelBuilder">The builder that defines the model for the context being created. </param>
+        </member>
+        <member name="M:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityDbContext`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityDbContext`1"/> class.
+            </summary>
+        </member>
+        <member name="M:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityDbContext`1.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityDbContext`1"/> class.
+            </summary>
+            <param name="nameOrConnectionString">Either the database name or a connection string. </param>
+        </member>
+        <member name="M:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityDbContext`1.OnModelCreating(System.Data.Entity.DbModelBuilder)">
+            <summary>
+            Applies custom model definitions for multi-tenancy.
+            </summary>
+            <param name="modelBuilder">The builder that defines the model for the context being created. </param>
+        </member>
+        <member name="T:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityUser">
+            <summary>
+            Minimal class for a <see cref="T:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityUser`5"/> with a
+            <see cref="T:System.String"/> user <see cref="P:Microsoft.AspNet.Identity.IUser`1.Id"/> and
+            <see cref="P:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityUserLogin`2.TenantId"/>.
+            </summary>
+        </member>
+        <member name="T:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityUser`5">
+            <summary>
+            Class defining a multi-tenant user.
+            </summary>
+            <typeparam name="TKey">The type of <see cref="P:Microsoft.AspNet.Identity.IUser`1.Id"/> for a user.</typeparam>
+            <typeparam name="TTenantKey">The type of <see cref="P:AspNet.Identity.EntityFramework.Multitenant.IMultitenantUser`2.TenantId"/> for a user.</typeparam>
+            <typeparam name="TLogin">The type of user login.</typeparam>
+            <typeparam name="TRole">The type of user role.</typeparam>
+            <typeparam name="TClaim">The type of user claim.</typeparam>
+        </member>
+        <member name="P:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityUser`5.TenantId">
+            <summary>
+            Gets or sets the unique identifier of the tenant.
+            </summary>
+        </member>
+        <member name="M:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityUser.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityUser"/> class.
+            </summary>
+        </member>
+        <member name="M:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityUser.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityUser"/> class.
+            </summary>
+            <param name="userName">The <see cref="P:Microsoft.AspNet.Identity.EntityFramework.IdentityUser`4.UserName"/> of the user.</param>
+        </member>
+        <member name="T:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityUserLogin">
+            <summary>
+            Minimal class for a <see cref="T:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityUserLogin`2"/> with a <see cref="T:System.String"/> user
+            <see cref="P:Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin`1.UserId"/>
+            and <see cref="P:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityUserLogin`2.TenantId"/>.
+            </summary>
+        </member>
+        <member name="T:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityUserLogin`2">
+            <summary>
+            Class defining a multi-tenant user login.
+            </summary>
+            <typeparam name="TKey">The type of <see cref="P:Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin`1.UserId"/> for a user.</typeparam>
+            <typeparam name="TTenantKey">The type of <see cref="P:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityUserLogin`2.TenantId"/> for a user.</typeparam>
+        </member>
+        <member name="P:AspNet.Identity.EntityFramework.Multitenant.MultitenantIdentityUserLogin`2.TenantId">
+            <summary>
+            Gets or sets the unique identifier of the tenant.
+            </summary>
+        </member>
+        <member name="T:AspNet.Identity.EntityFramework.Multitenant.MultitenantUserStore`1">
+            <summary>
+            The store for a multi tenant user.
+            </summary>
+            <typeparam name="TUser">The type of user.</typeparam>
+        </member>
+        <member name="T:AspNet.Identity.EntityFramework.Multitenant.MultitenantUserStore`7">
+            <summary>
+            The store for a multi tenant user.
+            </summary>
+            <typeparam name="TUser">The type of user.</typeparam>
+            <typeparam name="TRole">The type of role.</typeparam>
+            <typeparam name="TKey">The type of <see cref="P:Microsoft.AspNet.Identity.IUser`1.Id"/> for a user.</typeparam>
+            <typeparam name="TTenantKey">The type of <see cref="P:AspNet.Identity.EntityFramework.Multitenant.IMultitenantUser`2.TenantId"/> for a user.</typeparam>
+            <typeparam name="TUserLogin">The type of user login.</typeparam>
+            <typeparam name="TUserRole">The type of user role.</typeparam>
+            <typeparam name="TUserClaim">The type of user claim.</typeparam>
+        </member>
+        <member name="F:AspNet.Identity.EntityFramework.Multitenant.MultitenantUserStore`7._disposed">
+            <summary>
+            Flag indicating whether this object has been disposed.
+            </summary>
+        </member>
+        <member name="F:AspNet.Identity.EntityFramework.Multitenant.MultitenantUserStore`7._logins">
+            <summary>
+            Backing field for the <see cref="P:AspNet.Identity.EntityFramework.Multitenant.MultitenantUserStore`7.Logins"/> property.
+            </summary>
+        </member>
+        <member name="M:AspNet.Identity.EntityFramework.Multitenant.MultitenantUserStore`7.#ctor(System.Data.Entity.DbContext)">
+            <summary>
+            Initializes a new instance of the
+            <see cref="T:AspNet.Identity.EntityFramework.Multitenant.MultitenantUserStore`7"/> class.
+            </summary>
+            <param name="context">The <see cref="T:System.Data.Entity.DbContext"/>.</param>
+        </member>
+        <member name="M:AspNet.Identity.EntityFramework.Multitenant.MultitenantUserStore`7.CreateAsync(`0)">
+            <summary>
+            Creates a new user.
+            </summary>
+            <param name="user">The user to create.</param>
+            <returns>An <see cref="T:System.Threading.Tasks.Task"/> from which the operation can be awaited.</returns>
+        </member>
+        <member name="M:AspNet.Identity.EntityFramework.Multitenant.MultitenantUserStore`7.FindByNameAsync(System.String)">
+            <summary>
+            Finds a <typeparamref name="TUser"/> by their <see cref="P:Microsoft.AspNet.Identity.IUser`1.UserName"/>.
+            </summary>
+            <param name="userName">The <see cref="P:Microsoft.AspNet.Identity.IUser`1.UserName"/> of a <typeparamref name="TUser"/>.</param>
+            <returns>The <typeparamref name="TUser"/> if found; otherwise <c>null</c>.</returns>
+        </member>
+        <member name="M:AspNet.Identity.EntityFramework.Multitenant.MultitenantUserStore`7.AddLoginAsync(`0,Microsoft.AspNet.Identity.UserLoginInfo)">
+            <summary>
+            Adds the external login for the <paramref name="user"/>.
+            </summary>
+            <param name="user">The user.</param>
+            <param name="login">The login info.</param>
+            <returns>An <see cref="T:System.Threading.Tasks.Task"/> from which the operation can be awaited.</returns>
+        </member>
+        <member name="M:AspNet.Identity.EntityFramework.Multitenant.MultitenantUserStore`7.FindAsync(Microsoft.AspNet.Identity.UserLoginInfo)">
+            <summary>
+            Fins a user bases on their external login.
+            </summary>
+            <param name="login">The login info.</param>
+            <returns>The user if found, otherwise <c>null</c>.</returns>
+        </member>
+        <member name="M:AspNet.Identity.EntityFramework.Multitenant.MultitenantUserStore`7.FindByEmailAsync(System.String)">
+            <summary>
+            Find a user by email
+            </summary>
+            <param name="email">The Email address of a <typeparamref name="TUser"/>.</param>
+            <returns>The <typeparamref name="TUser"/> if found; otherwise <c>null</c>.</returns>
+        </member>
+        <member name="M:AspNet.Identity.EntityFramework.Multitenant.MultitenantUserStore`7.Dispose(System.Boolean)">
+            <summary>
+            Cleanly disposes of this object.
+            </summary>
+            <param name="disposing"><c>true</c> if the object is being disposed; otherwise <c>false</c>.</param>
+        </member>
+        <member name="M:AspNet.Identity.EntityFramework.Multitenant.MultitenantUserStore`7.ThrowIfInvalid">
+            <summary>
+            Throws exceptions if the state of the object is invalid or has been disposed.
+            </summary>
+        </member>
+        <member name="P:AspNet.Identity.EntityFramework.Multitenant.MultitenantUserStore`7.TenantId">
+            <summary>
+            Gets or sets the <see cref="P:AspNet.Identity.EntityFramework.Multitenant.IMultitenantUser`2.TenantId"/> to be used in queries.
+            </summary>
+        </member>
+        <member name="P:AspNet.Identity.EntityFramework.Multitenant.MultitenantUserStore`7.Logins">
+            <summary>
+            Gets the set of users.
+            </summary>
+        </member>
+        <member name="M:AspNet.Identity.EntityFramework.Multitenant.MultitenantUserStore`1.#ctor(System.Data.Entity.DbContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AspNet.Identity.EntityFramework.Multitenant.MultitenantUserStore`1"/> class.
+            </summary>
+            <param name="context">The <see cref="T:System.Data.Entity.DbContext"/>.</param>
+        </member>
+    </members>
+</doc>

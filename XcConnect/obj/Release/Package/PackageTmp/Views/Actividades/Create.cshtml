@@ -1,0 +1,115 @@
+﻿@model XcConnect.Models.Actividades
+
+@{
+    ViewBag.Title = "Actividades";
+}
+
+<h2>Crear Actividades</h2>
+
+
+@using (Html.BeginForm("Create", "Actividades", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="row wrapper border-bottom white-bg page-headingl">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.FechaRegistro, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FechaRegistro, new { htmlAttributes = new { @class = "form-control datecontrol" } })
+                @Html.ValidationMessageFor(model => model.FechaRegistro, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TipoActividadID, "Tipo de Actividad", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("TipoActividadID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TipoActividadID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FechaEntrega, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FechaEntrega, new { htmlAttributes = new { @class = "form-control datecontrol" } })
+                @Html.ValidationMessageFor(model => model.FechaEntrega, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Notas, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Notas, new { htmlAttributes = new { @class = "form-control", rows = "4" } })
+                @Html.ValidationMessageFor(model => model.Notas, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Archivos, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                <input type="file" name="ArchivosUploader" id="fileUpload" accept=".txt,.doc,.docx,.xls,.xlsx,.pdf,.ppt,.pptx,.msg,.jpg,.png" multiple />
+                <b><small>Máximo 5MB (txt, doc, docx, xls, xlsx, ppt, pptx, pdf, msg, jpg, png)</small></b>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-primary btn-md" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Regresar a la lista", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#fileUpload").on("change", function (e) {
+
+            var countErrors = 0;
+            var files = e.currentTarget.files;
+            var realFiles = 0;
+            var MaxSize = @int.Parse(ConfigurationManager.AppSettings["MaxFileSizeInMB"]);
+
+            for (var x in files) {
+                var filesize = ((files[x].size / 1024) / 1024).toFixed(4); // MB
+
+                if (files[x].name != "item" && typeof files[x].name != "undefined") {
+
+                    realFiles++;
+
+                    if (filesize > MaxSize) {
+                        countErrors++;
+                    }
+                }
+            }
+
+            if (countErrors > 0) {
+                if (realFiles == 1) {
+                    alert('El archivo seleccionado no es permitido porque superan el peso permitido de '+ MaxSize +'MB.');
+                }
+                else {
+                    alert('Los archivos fueron omitidos de la selección porque algunos superan el peso permitido de '+ MaxSize +'MB.');
+                }
+
+                $("#fileUpload").val('');
+            }
+        });
+    });
+</script>

@@ -1,0 +1,113 @@
+﻿@model XcConnect.Models.Cliente
+
+@{
+    ViewBag.Title = "Clientes";
+}
+
+<h2>Detalles Cliente</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ciudad.Ciudad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ciudad.Ciudad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RazonSocial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RazonSocial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RepresentanteLegal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RepresentanteLegal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SectorEconomico.SectorEconomico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SectorEconomico.SectorEconomico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Direccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Direccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Celular)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Celular)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SitioWeb)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SitioWeb)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vendedor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vendedor.NombreVendedor)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ClienteID }) |
+    @Html.ActionLink("Regresar a la lista", "Index")
+</p>

@@ -1,0 +1,110 @@
+﻿@model XcConnect.Models.Cotizacion
+
+@{
+    ViewBag.Title = "Detalle Cotización";
+}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row" style="margin-top: -10px;">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div class="ibox-title">
+                        <h2>Detalle Cotización</h2>
+                        <table class="pull-right" style="margin-top:-40px;">
+                            <tr>
+                                <td>@Html.ActionLink("Regresar a la lista", "Index", null, new { @class = "btn btn-primary", @title = "Regresar a la Lista" })</td>
+                                <td style="width: 5px;"></td>
+                                <td>@Html.ActionLink("Imprimir", "Print", new { id = Model.CotizacionID }, new { @class = "btn btn-primary", @title = "Imprimir" })</td>
+                                 <td style="width: 5px;"></td>
+                                <td>@Html.ActionLink("Editar", "Manage", new { id = Model.CotizacionID }, new { @class = "btn btn-primary", @title = "Editar" })</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <dl class="dl-horizontal">
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Fecha)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Fecha)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.NumberID)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.NumberID)
+                        </dd>
+
+                        <dt>Empresa</dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Empresa.Nombre)
+                        </dd>
+
+                        <dt>Cliente</dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Cliente.Nombre)
+                        </dd>
+
+                        <dt>Vendedor</dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Vendedor.NombreVendedor)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Valor)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Valor)
+                        </dd>
+                    </dl>
+                    <div class="table-responsive">
+                        <table id="tblDetail" class="table table-striped table-bordered table-hover dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Nombre</th>
+                                    <th>Especificaciones</th>
+                                    <th>Cant.</th>
+                                    <th>Val. Uni.</th>
+                                    <th>Val. Tot.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Items != null)
+                                {
+                                    foreach (var item in Model.Items)
+                                    {
+                                        <tr id="@("del"+item.ItemID)">
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Producto.Codigo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Producto.NombreProducto)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Producto.Especificaciones)
+                                            </td>
+                                            <td align="right">
+                                                @Html.DisplayFor(modelItem => item.Cantidad)
+                                            </td>
+                                            <td align="right">
+                                                @Html.DisplayFor(modelItem => item.ValUnitario)
+                                            </td>
+                                            <td align="right">
+                                                @Html.DisplayFor(modelItem => item.ValTotal)
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

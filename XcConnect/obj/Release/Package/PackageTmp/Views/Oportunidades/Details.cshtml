@@ -1,0 +1,112 @@
+﻿@model XcConnect.Models.Oportunidad
+
+@{
+    ViewBag.Title = "Oportunidades";
+}
+
+<h2>Detalles Oportunidad</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreOportunidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreOportunidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClienteID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Clientes.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SolicitadaPor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SolicitadaPor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vendedor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vendedor.NombreVendedor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaSolicitud)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaSolicitud)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaEntrega)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaEntrega)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCierre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCierre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+
+        @if (Model.Archivos != null && Model.Archivos.Count > 0)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Archivos)
+            </dt>
+            <dd>
+                <ul>
+                    @foreach (var archivo in Model.Archivos)
+                    {
+                        <li>
+                            <a href="@archivo.ArchivoUrl" target="_blank">@archivo.ArchivoNombre</a>
+                        </li>
+                    }
+                </ul>
+            </dd>
+        }
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.OportunidadID }) |
+    @Html.ActionLink("Regresar a la lista", "Index")
+</p>

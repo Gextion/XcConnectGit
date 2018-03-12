@@ -1,0 +1,65 @@
+﻿@model XcConnect.Models.Peticion
+
+@{
+    ViewBag.Title = "PQRs";
+}
+
+<h2>Detalles PQR</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaRegistro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaRegistro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoPeticion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoPeticion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaSolucion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaSolucion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Solucion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Solucion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResueltaPor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResueltaPor)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.PeticionID }) |
+    @Html.ActionLink("Regresar a la lista", "Index")
+</p>

@@ -1,0 +1,47 @@
+﻿@model XcConnect.Models.UserPermissionsViewModel
+@{
+    ViewBag.Title = "Permisos de Usuario";
+}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row" style="margin-top: -10px;">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Permisos</h5>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Permiso
+                                </th>
+                                <th>
+                                    Descripción
+                                </th>
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model.Roles)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RoleName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                            </tr>
+                        }
+                    </table>
+
+                    <br />
+
+                    <div>
+                        @Html.ActionLink("Regresar a la lista", "Index")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

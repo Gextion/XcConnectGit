@@ -1,0 +1,143 @@
+﻿@model XcConnect.Models.Reports.RptActividades
+
+@{
+    ViewBag.Title = "Actividades";
+}
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Filtros Reporte</h5>
+                    <div class="ibox-tools">
+                        <input type="button" value="PDF" class="btn btn-primary pull-right" onclick="printJS({ printable: 'printarea', type: 'html', maxWidth: 1824, font: 'Arial', font_size: '8pt'})" style="margin-top:-10px;margin-left: 5px;" />
+                        <input type="button" value="Excel" class="btn btn-primary pull-right" onclick="exportTableToCSV('actividades.csv')" style="margin-top:-10px;margin-left: 5px;" />
+                        <input type="button" value="Filtrar" class="btn btn-primary pull-right" onclick="BuildRpt(); return false;" style="margin-top:-10px;" />
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h5>Fecha Inicial</h5>
+                                @Html.EditorFor(model => model.FechaInicial, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.FechaInicial, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                <h5>Fecha Final</h5>
+                                @Html.EditorFor(model => model.FechaFinal, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.FechaFinal, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div id="printarea">
+                            <center><h1>TI CRM - Actividades</h1></center>
+                            <br />
+                            <div>
+                                <div class="row" style="margin-top:10px;">
+                                    <div class="col-md-4"><b>Fecha Inicial: </b><span id="FecIniText"></span><br /></div>
+                                    <div class="col-md-4"><b>Fecha Final: </b><span id="FecFinText"></span><br /></div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="table-responsive">
+                                <table id="rptTable" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th align="center"><b>Fecha</b></th>
+                                            <th align="center"><b>Descripción</b></th>
+                                            <th align="center"><b>Tipo Actividad</b></th>
+                                            <th align="center"><b>Fecha Ejecución</b></th>
+                                            <th align="center"><b>Notas</b></th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/bundles/bootstrapselect/css/")
+    @Styles.Render("~/bundles/bootstrapdialog/css")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrapdialog")
+    @Scripts.Render("~/bundles/bootstrapselect")
+
+    <script type="text/javascript">
+
+        function BuildRpt() {
+
+            var Fi = $('#FechaInicial').val();
+            var Ff = $('#FechaFinal').val();
+
+            $('#FecIniText').text($('#FechaInicial').val());
+            $('#FecFinText').text($('#FechaFinal').val());
+
+            $.ajax({
+                url: '@Url.Action("BuildRptActividades")',
+                data: { FecIni: Fi, FecFin: Ff },
+                success: function (data) {
+                    if (data) {
+                        if (!data.Success) {
+                            clearTableContent();
+                            BootstrapDialog.show({ title: 'Reporte', message: data.Message });
+                        }
+                        else {
+                            $('#rptTable').html(data.RptContent);
+                        }
+                    }
+                    else {
+                        clearTableContent();
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    BootstrapDialog.show({ title: 'Error', message: "Error ejecutando la acción. Por favor inténtelo de nuevo." });
+                }
+            });
+        }
+
+        function exportTableToCSV(filename) {
+            var csv = [];
+            var rows = document.querySelectorAll("table tr");
+
+            for (var i = 0; i < rows.length; i++) {
+                var row = [], cols = rows[i].querySelectorAll("td, th");
+
+                for (var j = 0; j < cols.length; j++)
+                    row.push(cols[j].innerText);
+
+                csv.push(row.join(";"));
+            }
+
+            // Download CSV file
+            var link = window.document.createElement("a");
+            link.setAttribute("href", "data:text/csv;charset=utf-8,%EF%BB%BF" + encodeURI(csv.join("\n")));
+            link.setAttribute("download", filename);
+            link.click();
+        }
+    </script>
+}
+
+<style>
+    .table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dataTable.display tbody td {
+        border-top: none;
+    }
+
+    .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+        border-top: none;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        border-top: none;
+    }
+</style>
